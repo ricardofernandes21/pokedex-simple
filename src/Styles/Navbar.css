@@ -1,21 +1,23 @@
 .navbar {
-    background-color: #333; 
-    color: #fff; 
+    background-color: #cc9b9b; 
+    color: #7c1111; 
     padding: 10px 20px; 
   }
   
   .navbar nav {
-    display: flex; /* Make the navigation items appear in a row */
-    justify-content: space-between; /* Spread the navigation items evenly */
+    display: flex; 
+    justify-content: center;
   }
   
   .navbar nav a {
-    text-decoration: none; /* Remove underline from links */
-    color: #fff; /* Text color for the links */
-    padding: 5px 10px; /* Padding around the links */
+    text-decoration: none; 
+    color: #fff; 
+    padding: 5px 10px; 
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
   }
   
   .navbar nav a:hover {
-    background-color: #555; /* Background color when hovering over links */
+    background-color: #5c5d5e; 
   }
   
