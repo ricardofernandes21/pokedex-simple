@@ -1,0 +1,21 @@
+.navbar {
+    background-color: #333; 
+    color: #fff; 
+    padding: 10px 20px; 
+  }
+  
+  .navbar nav {
+    display: flex; /* Make the navigation items appear in a row */
+    justify-content: space-between; /* Spread the navigation items evenly */
+  }
+  
+  .navbar nav a {
+    text-decoration: none; /* Remove underline from links */
+    color: #fff; /* Text color for the links */
+    padding: 5px 10px; /* Padding around the links */
+  }
+  
+  .navbar nav a:hover {
+    background-color: #555; /* Background color when hovering over links */
+  }
+  
