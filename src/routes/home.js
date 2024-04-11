@@ -1,46 +1,68 @@
-import React, { useEffect, useState } from 'react'
-import '../Styles/Home.css';
-import { PokemonCard } from '../components/PokemonCard';
-
+import React, { useEffect, useState } from "react";
+import "../Styles/Home.css";
+import { PokemonCard } from "../components/PokemonCard";
 
 export const Home = () => {
+  const [offset, setOffset] = useState(0);
+  const [pokemons, setPokemons] = useState([]);
+  const urlAllPokemons = `https://pokeapi.co/api/v2/pokemon?limit=20 0&offset=${offset}`;
 
-  const [page,setPage] = useState(1)
-  const [pokemonCount, setPokemonCount] = useState(0)
-  const [pokemons,setPokemons] = useState ([])
-
-
-  
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch(urlAllPokemons);
+      const data = await response.json();
+      setPokemons(data.results);
+      console.log(data.results);
+    };
+    getData();
+  }, [urlAllPokemons]);
 
   function handleNext() {
-    setPage(page + 1);
+    setOffset(offset + 20);
   }
 
   function handlePrev() {
-    if (page > 1) {
-      setPage(page - 1);
+    if (offset >= 20) {
+      setOffset(offset - 20);
     }
   }
- 
+
+  function getSprites() {
+    return pokemons.map((p) => {
+      const url = p.url;
+      const parts = url.split("/");
+      const id = parts[parts.length - 2]; // Extract the ID from the URL
+      const spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`;
+
+      return (
+        <img
+          src={spriteUrl}
+          alt={p.name}
+          className="pokemon-image"
+          style={{ display: "flex", width: "200px" }}
+          onClick={PokemonCard(id)}
+        />
+      );
+    });
+  }
 
   return (
     <div>
-      <div className='pokemon-card'>
-        <PokemonCard/>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}
+      >
+        {getSprites()}
       </div>
-        <div className="button-container">
-        <button
-          onClick={handlePrev}
-        >
-          Previous
-        </button>
-        <button
-          onClick={handleNext}
-        >
-          Next
-        </button>
+      <div className="button-container">
+        <button onClick={handlePrev}>Previous</button>
+        <button onClick={handleNext}>Next</button>
       </div>
     </div>
-  )
-}
-
+  );
+};
