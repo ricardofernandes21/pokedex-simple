@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Styles/Home.css";
-import { PokemonCard } from "../components/PokemonCard";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   const [offset, setOffset] = useState(0);
@@ -12,7 +12,6 @@ export const Home = () => {
       const response = await fetch(urlAllPokemons);
       const data = await response.json();
       setPokemons(data.results);
-      console.log(data.results);
     };
     getData();
   }, [urlAllPokemons]);
@@ -31,34 +30,23 @@ export const Home = () => {
     return pokemons.map((p) => {
       const url = p.url;
       const parts = url.split("/");
-      const id = parts[parts.length - 2]; // Extract the ID from the URL
-      const spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`;
+      const id = parts[parts.length - 2];
+      const spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
 
       return (
-        <img
-          src={spriteUrl}
-          alt={p.name}
-          className="pokemon-image"
-          style={{ display: "flex", width: "200px" }}
-          onClick={PokemonCard(id)}
-        />
+        <div className="card">
+          <Link to={`/Pokemon/${id}`} key={id}>
+            <img className="pokemon-image" src={spriteUrl} alt={p.name} />
+          </Link>
+          <p>{p.name}</p>
+        </div>
       );
     });
   }
 
   return (
     <div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          flexWrap: "wrap",
-        }}
-      >
-        {getSprites()}
-      </div>
+      <div className="img-container">{getSprites()}</div>
       <div className="button-container">
         <button onClick={handlePrev}>Previous</button>
         <button onClick={handleNext}>Next</button>

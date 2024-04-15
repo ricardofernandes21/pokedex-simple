@@ -1,6 +1,6 @@
 .button-container {
     display: flex;
-    justify-content: end;
+    justify-content: center;
 }
 
 .button-container button {
@@ -18,3 +18,18 @@
   .button-container button:hover {
     background-color: #5c5d5e;
   }
+
+  .img-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: "center";
+    flex-wrap: wrap;
+    cursor: pointer;
+  }
+  .pokemon-image {
+  display: flex;
+  width: 220px;
+  cursor: pointer;
+  }
+
